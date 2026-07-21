@@ -1,298 +1,349 @@
-# jarvis
-Personal Assistant for the AI &amp; Robotics Club
+# JARVIS - A Modular AI Assistant
 
-Check my contribution here ( Web Search & Summarization Feature ): 
-- [Link](https://github.com/Ajay-Kumar-Prasad/jarvis/tree/main/Skills/web_search)
-# Phase 1: Core Architecture Setup
+<p align="center">
 
-![alt text](image.png)
+**A hands-free AI assistant built for natural human-computer interaction.**
 
-1. Define the JARVIS Framework**
+Voice. Vision. Intelligence.
 
-- **Create a modular architecture :**
+Designed to be modular, extensible, and client-agnostic.
 
-  - Intent Recognizer → routes user queries
-
-  - Skill Manager → dispatches to the right skill
-
-  - Response Generator → formats response for the interface (Discord/CLI/Web).
-
-- **Use a message-passing pattern (like an internal API or event bus)**
-
-- **Maintain a common API layer so all interfaces call the same backend**
-
-2. Skill Manager
-
-- **Make a skill_registry where each skill registers with:**
-
-  - intent_name
-
-  - handler_function
-
-  - required_params
-
-- **Example:**
-```
-{
-  "faq": "faq_handler",
-  "event_schedule": "calendar_handler",
-  "directory": "directory_handler",
-  "device_control": "mqtt_handler",
-  "general_knowledge": "web_handler"
-}
-```
-# 📍 Phase 2: Implement Skills
-
-Start with simple implementations, then improve.
-
-1. FAQ Skill
-
-  - **Store FAQs in a Vector DB (Pinecone, Weaviate, FAISS)**
-
-  - **Pipeline**:
-
-    - User query → embed → semantic search → return best answer.
-
-  - **Tools:** sentence-transformers, FAISS (local), or OpenAI Embeddings.
-
-2. Event Schedule Skill
-
-  - **Connect Google Calendar API / Notion API**
-
-  - **Features**:
-
-    - Fetch upcoming events.
-
-    - Answer queries like “What’s happening this weekend?”.
-
-  - **Use Google API client or Notion SDK**
-
-3. Directory Skill
-
-  - Create a club database (JSON, SQL, or Airtable).
-
-  - Store members, roles, projects, contact info.
-
-  - Handler: query DB and return formatted info.
-
-  - Example: “Who is the Robotics Lead?” → “John Doe (john@club.com
-  )”.
-
-4. Device Control Skill
-
-  - Integrate with MQTT or ROS.
-
-  - **Example flow:**
-
-    - Intent: “Move rover forward 10m.”
-
-    - Skill: Publish rover/move {forward: 10} to MQTT broker.
-
-    - Start with simple commands, later expand to multiple robotics devices.
-
-5. General Knowledge Skill
-
-  - **Use a Web Search API (SerpAPI, Bing Web Search, DuckDuckGo API)**
-
-  - **Steps:**
-
-    - Fetch top results.
-
-    - Summarize with LLM (or extract snippets).
-
-    - Return concise response.
-
-# 📍 Phase 3: Interfaces (One Brain, Many Interfaces)
-
-  - **All interfaces → call central JARVIS backend.**
-
-  - **Website Chatbot (JARVIS 1)**
-
-    - Frontend: React chatbot UI.
-
-    - Backend: Flask/FastAPI/Node.js → routes to JARVIS core.
-
-  - **Discord Bot**
-
-    - Use discord.js (Node.js) or discord.py.
-
-    - On message → send text to JARVIS backend → return response.
-
-  - **Android/PC App**
-
-    - Android: Flutter/React Native → API calls to JARVIS backend.
-
-    - PC: Simple Electron app**
-
-  - **CLI**
-
-Python CLI → takes input → calls backend → prints response.
-
-# 📍 Phase 4: Orchestration & Enhancement
-
-  - **Context Handling**
-
-    - Maintain short-term conversation memory.
-
-    - Example:
-
-    - User: “When is Robotics meeting?”
-
-    - JARVIS: “Friday at 6PM.”
-
-    - User: “Where is it?” → use context → “Robotics Lab.”
-
-  - **Fallback System**
-
-    - If FAQ/Directory/Event/Device Control fail → fallback to General Knowledge Skill.
-
-  - **Logging & Analytics**
-
-    - Store all queries and intents.
-
-    - Track “intent coverage” → helps improve FAQ and Directory.
-
-# 📍 Phase 5: Advanced Features
-
-  - Add voice interface (speech-to-text + TTS).
-
-  - Add agentic workflows (JARVIS can perform multi-step tasks).
-
-  - Add user authentication for private info (events, member details).
-
-## Overview
-
-This project integrates two main components:
-
-1. **Intent Classification**
-   - Understands the user's goal from natural language input.
-   - Produces structured output (JSON) containing `intent` and `entities`.
-
-2. **AI Browser Agent**
-   - Maps intents to browser actions automatically.
-   - Executes tasks on the web without manual intervention.
-
-This combination allows **automated execution of complex web tasks** triggered by natural language commands.
+</p>
 
 ---
 
-## Features
+## 🎥 Demo
 
-- Accepts natural language commands
-- Automatic intent classification
-- Entity extraction for parameterized actions
-- Browser automation using Playwright or Selenium
-- Supports multi-step task execution
-- Modular architecture for easy extension
-- Optional feedback or result extraction
+Watch JARVIS in action:
+
+[![Watch the demo](https://img.youtube.com/vi/HpdUKONb0ZY/maxresdefault.jpg)](https://youtu.be/HpdUKONb0ZY)
 
 ---
 
-## Architecture
-```
-User Input (Natural Language)
-↓
-Intent Classifier (NLP Model)
-↓
-Intent + Entities (JSON)
-↓
-Action Planner / Task Mapper
-↓
-AI Browser Agent (Playwright / Selenium)
-↓
-Task Execution / Feedback
-```
-## File Structure
+# ✨ Why JARVIS?
 
+JARVIS is a modular AI assistant designed around the idea that interacting with computers should feel natural.
+
+Instead of relying on a keyboard and mouse, users interact with JARVIS using **voice commands** and **hand gestures**. The project follows a client-server architecture where multiple frontends can communicate with a common AI backend.
+
+Although this repository demonstrates JARVIS using a **Pygame desktop client**, the backend is designed to support multiple interfaces including:
+
+* 🖥️ Desktop
+* 🌐 Web
+* 📱 Mobile
+* 🤖 Discord Bots
+* ...and future clients
+
+Beyond being an AI assistant, JARVIS serves as a learning platform for club members to explore modern AI systems, software architecture, computer vision, natural language processing, and LLM-powered applications.
+
+---
+
+# 🚀 Features
+
+### 🎙️ Hands-Free Interaction
+
+* Voice-controlled interface
+* Hand gesture support
+* No keyboard or mouse required for normal operation
+
+### 🧠 Intelligent Request Routing
+
+JARVIS understands user requests using:
+
+* Intent Classification
+* Parameter Extraction
+
+Once a request is understood, it is automatically routed to the appropriate client-side or server-side skill.
+
+---
+
+### ⚙️ Current Backend Skills
+
+* 🌤️ Weather
+* 😂 Jokes
+* 📚 Club Knowledge Q&A (RAG-based)
+* 🌐 General Question Answering using Web Search
+* ➗ Quick Math
+
+---
+
+### 💻 Current Frontend Skills
+
+* 🎵 Music Playback
+* 🌐 Browser Automation *(Work in Progress)*
+
+---
+
+# 🏗️ Architecture
+
+```text
+                   +-------------------+
+                   |     Frontend      |
+                   | (Desktop/Web/etc) |
+                   +---------+---------+
+                             |
+                 Speech-to-Text
+                             |
+                             v
+                   +-------------------+
+                   |     Backend        |
+                   |                   |
+                   | Intent Classifier |
+                   | Parameter Extract |
+                   +---------+---------+
+                             |
+          +------------------+------------------+
+          |                                     |
+ Backend Skill                        Frontend Skill
+          |                                     |
+          +------------------+------------------+
+                             |
+                       Response Text
+                             |
+                      Text-to-Speech
+                             |
+                           User
 ```
-ai_browser_agent/
+
+The backend is intentionally independent of the frontend, allowing multiple clients to reuse the same AI pipeline.
+
+---
+
+# 🔄 Request Flow
+
+```mermaid
+flowchart TD
+
+A[🎤 User Speaks]
+
+B[Speech-to-Text]
+
+C[Backend]
+
+D[Intent Classification]
+
+E[Parameter Extraction]
+
+F{Backend Skill?}
+
+G[Execute Backend Skill]
+
+H[Return Result]
+
+I[Return Intent + Parameters]
+
+J[Execute Frontend Skill]
+
+K[Generate Response]
+
+L[Text-to-Speech]
+
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+
+F -->|Yes| G
+G --> H
+H --> L
+
+F -->|No| I
+I --> J
+J --> K
+K --> L
+```
+
+---
+
+# 📁 Repository Structure
+
+```text
+JARVIS
 │
-├─ run_agent.py         # Entry point to run the agent
-├─ actions.py           # Action mapping and browser execution
-├─ sample_input.json    # Sample intent classifier output
-├─ requirements.txt
+├── backend/
+│   ├── FastAPI backend
+│   ├── Intent Classification
+│   ├── Parameter Extraction
+│   └── Backend Skills
+│
+├── pygame_frontend/
+│   ├── Desktop Client
+│   ├── Voice Interface
+│   ├── Hand Gesture Interface
+│   └── Frontend Skills
+│
+├── AI_Browser_Agent/
+│   Experimental browser automation
+│
+├── discord_bot/
+│   Experimental Discord client
+│
+├── requirements.txt
+├── LICENSE
+└── README.md
 ```
 
-## Setup & Installation
+---
 
-1. **Clone the repository**
+# 🛠️ Tech Stack
+
+## Core
+
+* Python
+* FastAPI
+* Pygame
+
+## AI
+
+* Ollama
+* PyTorch
+* Transformers
+* Sentence Transformers
+* spaCy
+
+## Computer Vision
+
+* MediaPipe
+
+## Speech
+
+* Google Speech Recognition
+* Edge TTS
+
+## Future
+
+* ChromaDB for vector storage
+
+---
+
+# 🚀 Getting Started
+
+## 1. Clone the repository
+
 ```bash
-git clone https://github.com/username/intent-agent.git
-cd intent-agent
+git clone <repo-url>
+cd JARVIS
 ```
 
-Install dependencies
+---
+
+## 2. Create a virtual environment
+
+```bash
+python -m venv .venv
 ```
+
+Activate it.
+
+---
+
+## 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-Install Playwright browsers
-```
-playwright install
-```
+---
 
-Set API keys (if using GPT API) in .env file:
-```
-OPENAI_API_KEY=your_api_key_here
-```
-Usage
-Run the agent with a sample intent JSON:
+## 4. Install the spaCy model
 
-```
-python run_agent.py
+```bash
+python -m spacy download en_core_web_sm
 ```
 
-Sample intent JSON input
+---
 
-```
-{
-  "intent": "add_to_cart",
-  "entities": {"product": "milk"}
-}
-```
-Agent automatically performs the task in the browser.
+## 5. Install Ollama
 
-```
-Example Workflow
-User Input:
-"Add milk to my shopping cart"
-```
+Install Ollama and pull a lightweight model of your choice.
 
-Intent Classifier Output:
-```
-{
-  "intent": "add_to_cart",
-  "entities": {"product": "milk"}
-}
+---
+
+## 6. Start the backend
+
+```bash
+cd backend
+
+uvicorn server:app --reload
 ```
 
-Action Planner Maps Intent → Actions:
-```
-[
-  {"action": "open_page", "url": "https://www.example.com/shop"},
-  {"action": "search", "product": "milk"},
-  {"action": "click", "selector": ".add-to-cart-btn"}
-]
-```
+---
 
-- AI Browser Agent Executes Actions Automatically
+## 7. Start the frontend
 
-- Task Completed / Feedback Provided
+```bash
+cd pygame_frontend
 
-- Contributing
-```
-Fork the repository
-
-Create a new branch: git checkout -b feature/your-feature
-
-Commit changes: git commit -m "Add new feature"
-
-Push branch: git push origin feature/your-feature
-
-Open a Pull Request
+python ui.py
 ```
 
-License
-This project is licensed under the MIT License – see the LICENSE file for details.
+---
 
+## Requirements
 
+* 🎤 Microphone
+* 📷 Webcam
+* Python 3.x
+
+---
+
+# ➕ Adding New Skills
+
+JARVIS is designed around intent recognition and parameter extraction, making it straightforward to extend with new capabilities.
+
+Currently, skills are routed through explicit logic in the codebase.
+
+A registration/plugin-based architecture is planned, allowing future skills to be added in a true plug-and-play fashion with minimal configuration.
+
+---
+
+# 🧪 Experimental Features
+
+The repository also contains experimental components under active development.
+
+* AI Browser Agent
+* Discord Bot Client
+
+These projects are still evolving and may change significantly.
+
+---
+
+# 🗺️ Roadmap
+
+* Plugin-based skill registration
+* Browser automation
+* Mobile client
+* Web client
+* Discord integration
+* ChromaDB integration for Retrieval-Augmented Generation
+* Improved multimodal interactions
+* Additional AI-powered skills
+
+---
+
+# 🤝 Contributing
+
+Contributions are always welcome.
+
+Whether you're interested in AI, computer vision, backend development, frontend applications, or software architecture, there are plenty of opportunities to contribute.
+
+Feel free to open issues, submit pull requests, or propose new skills and improvements.
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+See the `LICENSE` file for details.
+
+---
+
+<p align="center">
+
+**Built with ❤️ by the AI and Robotics Club, NIT Andhra Pradesh.**
+
+*"The best way to learn AI is to build AI."*
+
+</p>
