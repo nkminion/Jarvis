@@ -1,7 +1,0 @@
-What is machine learning and how does it work?
-
-Machine learning has been behind many of the recent advances in the development of artificial intelligence. It underpins many of the applications of AI that people encounter each day, from image and voice recognition to online recommendation tools. Here we answer some of the questions about what this technology actually is and how it works.
-
-What is machine learning?
-
-Machine learning is one of the leading approaches used in the development of artificial intelligence (AI). Rather than using pre-programmed instructions to process data, machine learning uses algorithms that can be trained to identify and adapt to statistical patterns. They can learn from large datasets of numbers such as bank transactions or information from sensors, text from books or the internet, images or audio, depending on the intended purpose of the algorithm. Once trained, the algorithm can then apply what it has learned to new sources of information. While humans can pick up new skills with just a few examples, machine learning algorithms need to be trained on vast amounts of data before they can detect patterns in new information. Their ability to comb through large datasets, however, also means they can pick out patterns that might not be obvious to humans. You can find out more about machine learning and its capabilities through our interactive infographic.

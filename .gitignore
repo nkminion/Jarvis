@@ -9,5 +9,9 @@ __pycache__/
 node_modules/
 .env
 
+cache_pages
+
 # Ignore global folders outside project
 ../*
+
+*.pyc

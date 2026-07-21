@@ -1,5 +1,0 @@
-sounddevice
-numpy
-SpeechRecognition
-gTTS
-playwright
